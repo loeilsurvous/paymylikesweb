@@ -11,17 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('jackpot_users', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('phone', 15)->nullable();
-            $table->string('password');
-            $table->double('account', 8, 3)->default(0);
             $table->boolean('is_admin')->default(false);
-            $table->rememberToken();
+            $table->string('image', 255);
+            $table->unsignedBigInteger('likes')->default(0);
+            $table->foreignUuid('user_id');
+            $table->foreignUuid('jackpot_id');
             $table->timestamps();
+            $table->unique(['user_id', 'jackpot_id'], 'user_jackpot_uniquness');
         });
     }
 
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('jackpot_users');
     }
 };

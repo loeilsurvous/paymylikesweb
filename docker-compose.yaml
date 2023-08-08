@@ -1,0 +1,45 @@
+version: '3.9'
+
+services:
+  api:
+    build:
+      args:
+        user: paymylikes
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    working_dir: /var/www
+    container_name: api
+    env_file:
+      - ./.env
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - maildev
+      - db
+
+    ports:
+      - 8000:8000
+    command:  >
+     sh -c "php artisan migrate  && php artisan serve  --host=0.0.0.0 --port=8000"
+  maildev:
+    image: maildev/maildev
+    ports:
+      - "1080:1080"
+      - "1025:1025"
+    container_name: maildev
+  db:
+    image: mysql:8
+    container_name: admin_db
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=paymylikesdb
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_PASSWORD=pass123456
+      - MYSQL_USER=myuser
+    volumes:
+      - db_data:/var/lib/mysql   
+volumes:
+  db_data:
+
