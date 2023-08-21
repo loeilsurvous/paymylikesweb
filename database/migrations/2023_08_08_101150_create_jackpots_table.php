@@ -18,8 +18,9 @@ return new class extends Migration
             $table->dateTime('starts_at', 0);
             $table->dateTime('ends_at', 0);
             $table->boolean('is_public')->default(true);
-            $table->double('wager', 8, 3);
-            $table->double('commission', 5, 3)->default(0.05);
+            $table->double('solde', 5, 3)->default(0.05);
+            $table->double('amount', 5, 3)->default(0.05);
+            $table->integer('maxparticipant')->default(100);
             $table->foreignUuid('user_id');
             $table->timestamps();
             $table->softDeletes();
