@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('phone', 15)->nullable();
+            $table->string('cover', 255)->nullable(); # photo de couverture
+            $table->string('profile', 255)->nullable(); # photo de profile
             $table->string('password');
             $table->double('account', 8, 3)->default(0);
             $table->boolean('is_admin')->default(false);

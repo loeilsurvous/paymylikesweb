@@ -24,6 +24,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'phone',
         'password',
+        'profile', # photo de profile
+        'cover' # photo de couverture
     ];
 
     /**
@@ -45,4 +47,12 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function transactionin () {
+        return $this->morphToMany(Transaction::class, 'destination');
+    }
+    public function transactionout () {
+        return $this->morphToMany(Transaction::class, 'source');
+    }
+
 }
