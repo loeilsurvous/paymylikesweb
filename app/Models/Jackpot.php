@@ -9,11 +9,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Jackpot extends Model
 {
+    use HasFactory, SoftDeletes;
+
     public $incrementing = false;
 	protected $keyType = 'uuid';
-    use HasFactory, SoftDeletes;
     protected $fillable = ['id', 'description', 'maxparticipant','status',
-    'starts_at', 'ends_at', 'is_public', 'wager', 'commission'];
+    'starts_at', 'ends_at', 'is_public', 'amount', 'solde'];
 
     protected $hidden = ['deleted_at'];
 

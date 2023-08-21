@@ -39,7 +39,7 @@ services:
       - MYSQL_PASSWORD=pass123456
       - MYSQL_USER=myuser
     volumes:
-      - db_data:/var/lib/mysql   
+      - db_data:/var/lib/mysql
 volumes:
   db_data:
 
