@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('jackpots', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('title', 255);
             $table->text('description');
             $table->string('status');
             $table->dateTime('starts_at', 0);

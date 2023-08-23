@@ -15,10 +15,14 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('typePub');
             $table->string('contenu_pub');
-            $table->dateTime('date_pub');
-            $table->string('fileName');
+            $table->dateTime('date_pub')->nullable();
+            $table->string('fileName')->nullable();
+            $table->foreignUuid('user_id');
+            $table->foreignUuid('jackpot_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->unique(['user_id', 'jackpot_id'], 'publication_in_jackpot_uniqueness');
         });
     }
 
