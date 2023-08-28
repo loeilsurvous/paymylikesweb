@@ -18,5 +18,5 @@ yarn-error.log
 /.idea
 /.vscode
 /*.sqlite
-/Dockerfile
-/docker-compose.yaml
+/docker
+/docker-compose*
