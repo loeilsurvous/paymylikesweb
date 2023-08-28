@@ -21,6 +21,6 @@ class UserResource extends JsonResource
             'profile' => $this->profile,
             'cover' => $this->cover,
             
-        ]
+        ];
     }
 }

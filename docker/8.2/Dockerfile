@@ -6,12 +6,17 @@ ARG WWWGROUP
 ARG NODE_VERSION=18
 ARG POSTGRES_VERSION=15
 
+# Arguments defined in docker-compose.yml
+ARG user
+ARG uid
+
 WORKDIR /var/www/html
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV TZ=UTC
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 
 RUN apt-get update \
     && apt-get install -y gnupg gosu curl ca-certificates zip unzip git supervisor sqlite3 libcap2-bin libpng-dev python2 dnsutils librsvg2-bin \
@@ -45,8 +50,10 @@ RUN apt-get update \
 
 RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.2
 
-RUN groupadd --force -g $WWWGROUP sail
-RUN useradd -ms /bin/bash --no-user-group -g $WWWGROUP -u 1337 sail
+# Create system user to run Composer and Artisan Commands
+RUN useradd -G www-data,root -u $uid -d /home/$user $user
+RUN mkdir -p /home/$user/.composer && \
+    chown -R $user:$user /home/$user
 
 COPY start-container /usr/local/bin/start-container
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf

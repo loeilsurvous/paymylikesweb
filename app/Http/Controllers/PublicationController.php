@@ -20,7 +20,7 @@ class PublicationController extends Controller
         $this->publication = $this->publication;
     }
     /**
-     * Display a listing of the resource.
+     * Display a listing of the publications.
      */
     public function index()
     {
@@ -29,7 +29,7 @@ class PublicationController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created publication.
      */
     public function store(PublicationStoreRequest $request)
     {
@@ -49,7 +49,7 @@ class PublicationController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified publication by id.
      */
     public function show(string $id)
     {

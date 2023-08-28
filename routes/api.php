@@ -18,9 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::group(['middleware' =>'auth:sanctum'], function () {
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/publications', [PublicationController::class, 'index']);
     Route::post('/publications', [PublicationController::class, 'store']);
     Route::get('/publications/{id}', [PublicationController::class, 'show']);
+    Route::put('/publications/{id}', [PublicationController::class, 'update']);
     Route::delete('/publications/{id}', [PublicationController::class, 'destroy']);
 });
